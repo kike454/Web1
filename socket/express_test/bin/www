@@ -29,9 +29,15 @@ io.on('connection', (socket) => {
   console.log('Usuario conectado al chat.');
 
   // Escuchar mensajes
-  socket.on('chat message', (msg) => {
-    console.log('Mensaje recibido: ' + msg);
-    io.emit('chat message', msg); // Emitir mensaje a todos los clientes
+  socket.on('chat message', (data) => {
+    const { username, message } = data; //// Recibe el nombre del usuario y el mensaje
+    const timestamp = new Date().toLocaleTimeString(); // Hora actual
+    //console.log('Mensaje recibido: ' + msg);
+    io.emit('chat message', {
+            username: username,
+            message: message,
+            time: timestamp
+    }); // Emitir mensaje a todos los clientes
   });
 
   socket.on('disconnect', () => {

@@ -20,7 +20,7 @@ router.post('/', async function(req,res, next){
     const isValid = await database.user.isLoginRight(name, pass);
 
     req.session.name = database.user.data[name];
-    //console.log(req.session.name);
+    console.log(req.session.name);
     if(isValid){
         res.redirect('/restricted');
     }else{
