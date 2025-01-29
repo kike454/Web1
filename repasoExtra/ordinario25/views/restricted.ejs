@@ -1,0 +1,41 @@
+<%- include("header", {}); %>
+
+<h1> Welcome to <%= title %></h1>
+
+<p> Solo pueden acceder usuarios registrados al juego</p>
+
+
+<canvas width="400" height="400" id="game"></canvas>
+<div id = "wrapscript">
+
+
+<script type="module" src="/javascripts/snake.js" defer></script> 
+<script  type="module" src="/javascripts/postScoreGames.js" defer></script>
+</div>
+<table >
+    
+       
+    <tr>
+      <th>User</th>
+      <th>Score</th>
+    </tr>
+    <% 
+      // Convertir el objeto db a un array y ordenar por score (mayor a menor)
+      const sortedUsers = Object.values(db).sort((a, b) => b.score - a.score); 
+    %>
+
+
+
+        <% sortedUsers.forEach(user => { %>
+    <tr>
+      <td> <%= user.username %> </td>
+      <td><%= user.score %></td>
+    </tr>
+   
+    
+
+    <% }); %>
+  </table>
+  
+
+<%- include("footer", {}); %>
